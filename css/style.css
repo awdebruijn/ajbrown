@@ -529,7 +529,7 @@ li[class^="row"]{
 	margin-left:20px;
 	height: 42px;
 	margin-bottom:13px;
-	width:280px;
+	width:284px;
 }
 .guessed{
 	font-family: 'platform';
@@ -651,6 +651,7 @@ li[class^="row"]{
 	position:relative;
 	top:155px;
 	z-index: 11;
+ 	-webkit-animation-duration: 0.2s;
 }
 .animateRotation{
 	-webkit-animation-delay: 1.5s;
@@ -665,10 +666,10 @@ li[class^="row"]{
 }
 
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
+@media (min-width: 768px) and (max-width:1024px){
 	.header{
 		margin: 130px auto 40px;
-		width: 45%;
+		width: 40%;
 	}
 	#game{
 		width:100%;
@@ -683,41 +684,9 @@ li[class^="row"]{
 		margin-left:0;
 	}
 	.word{
-		width:280px;
+		width:284px;
 		margin:0 auto;
-	}
-	li[class^="row"]{
-		text-align:center;
-	}
-	.output{
-		text-align:left;
-	}
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-	.responsive{
-
-	}
-	.header{
-		margin:90px auto 40px;
-		width:30%;
-	}
-	#game{
-		width:960px;
-		margin:50px auto 30px;
-	}
-	#contact{
-		width:960px;
-		margin:0 auto;
-	}
-	.guessed{
-		font-size:54px;
-		margin-left:0;
-	}
-	.word{
-		width:280px;
-		margin:0 auto;
+		padding-left:4px;
 	}
 	li[class^="row"]{
 		text-align:center;
@@ -730,7 +699,56 @@ li[class^="row"]{
 		height: 65px;
 	}
 	.end{
-		top:184px;
+		top:198px;
+		width:100%;
+	}
+	#sticker{
+		width:230px;
+	}
+	#available{
+		width:190px;
+		top:177px;
+	}
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 1025px) {
+	.responsive{
+
+	}
+	.header{
+		margin:90px auto 40px;
+		width:30%;
+	}
+	#game{
+		width:960px;
+		margin:25px auto 30px;
+	}
+	#contact{
+		width:960px;
+		margin:0 auto;
+	}
+	.guessed{
+		font-size:54px;
+		margin-left:0;
+	}
+	.word{
+		width:284px;
+		margin:0 auto;
+		padding-left:4px;
+	}
+	li[class^="row"]{
+		text-align:center;
+	}
+	.output{
+		text-align:left;
+		margin-top:80px;
+	}
+	[class^="bar"]{
+		height: 65px;
+	}
+	.end{
+		top:138px;
 		width:960px;
 	}
 	#sticker{
@@ -744,7 +762,7 @@ li[class^="row"]{
 
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
-
+	.end{
+		top:158px;
+	}
 }
-
-

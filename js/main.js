@@ -153,7 +153,7 @@ $(function() {
 
 			function appendGuessedWord(data,index,row){
 				var word = capFirstLetter(data[index].word);
-				row.append($('<span class="guessed">'+word+'</span>'));
+				row.append($('<span class="guessed animated flip">'+word+'</span>'));
 			}
 			
 			function capFirstLetter(string){
@@ -208,6 +208,7 @@ $(function() {
 						if(current+1 == index){ 
 							console.log("nextTurn() says: next turn=",index);
 							newTurn(index);
+							startTurn();
 						}
 					}else{
 						console.log("nextTurn() says: game ended");
@@ -248,6 +249,7 @@ $(function() {
 						endTurn();
 						nextTurn();									// Start next turn or end game
 						placeGuessedWord();							// Run after nextTurn()
+						endAnimation();
 					}
 				});
 			}
@@ -261,10 +263,10 @@ $(function() {
 				if((inputWord === currentWord) || (getTurnTriesLeft()==0)) {
 					if(inputWord === currentWord){
 						console.log('>>>> word has been guessed');
-						displayOverlay(t[0],i[0]);					// text: Sweet! img: ok
+						// displayOverlay(t[0],i[0]);					// text: Sweet! img: ok
 					}else if(getTurnTriesLeft()==0){
 						console.log('>>>> too many wrong letters');
-						displayOverlay(t[1],i[1]);					// text: Bummer! img: x
+						// displayOverlay(t[1],i[1]);					// text: Bummer! img: x
 					}
 					return true;
 				}else{
@@ -389,25 +391,28 @@ $(function() {
 				var delay = 0;
 
 				if(getGameEnded()){
-					$.each(data, function(index, item) {
-						var el = $('<div class="bar_'+index+'"></div>');
-						var rowColor = $("#game").find(".row_"+index).css('color');
-						$(".row_"+index).append(el);
-						el.css('backgroundColor', rowColor);
-						el.addClass('animateBarWidth').css('-webkit-animation-delay',''+delay+'s').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
-							function(){
-								$(this).css('width', '100%');
-							});
-						delay +=0.1;
-					});
+					setTimeout(function(){
+						$.each(data, function(index, item) {
+							var el = $('<div class="bar_'+index+'"></div>');
+							var rowColor = $("#game").find(".row_"+index).css('color');
+							$(".row_"+index).append(el);
+							el.css('backgroundColor', rowColor);
+							el.addClass('animateBarWidth').css('-webkit-animation-delay',''+delay+'s').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+								function(){
+									$(this).css('width', '100%');
+								});
+							delay +=0.1;
+						});
+					}, 2000);
 					setTimeout(function(){
 						$('#game').append('<div class="end"><img id="available" src="img/available.png" alt="available now" width="163"/><img id="sticker" src="img/sticker.png" alt="sticker" width="200"/></div>');
+						$('#available').addClass('animated bounceIn');
 						$('#sticker').addClass('animated bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
 						function(){
 							$(this).removeClass('animated bounceIn');
 							$(this).addClass('animateRotation');
 						});
-					}, 1000);
+					}, 3400);
 				}
 			}
 
