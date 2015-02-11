@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="ClearType" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimal-ui">
+
+    <!-- DNS prefetch -->
+    <link rel="dns-prefetch" href="//ajax.googleapis.com">
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+
+    <!-- Title, desc -->
+    <title>AJBrown.</title>
+    <meta name="description" content="AJBrown.">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/animate.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Modernizr -->
+    <script src="js/vendor/modernizr-2.8.1.min.js"></script>
+</head>
+<body>
+    <div role="document">
+        <header role="banner">
+            <div class="header">
+                <img class="responsive" id="aj" src="img/ajbrown.svg" alt="aj" width="280"/>
+            </div>
+        </header>
+        <main role="main">
+            <ul id="game">
+            </ul>
+            <div id="contact">
+                <a href="http://nl.linkedin.com/in/arjendebruijn/en"><img id="in" src="img/in.svg" alt="linkedin" width="40" height="40"/></a>
+                <a href="mailto:info@arjendebruijn.nl?Subject=Hello!"><img id="mail" src="img/mail.svg" alt="e-mail" width="44" height="30"/></a>
+            </div>
+        </main>
+        <div class="overlay hidden">
+            <img class="responsive" src="img/ajbrown.svg" alt="aj" width="280"/>
+            <div class="m_wrapper">
+                <img id="icon" src="img/circle.png" width="158" height: "158" alt="icon"/>
+                <p id="message"></p>
+                <button id="continue">continue</button>
+            </div>
+        </div>
+        <nav role="navigation"></nav>
+        <aside role="complementary"></aside>
+        <footer role="contentinfo"></footer>
+    </div>
+
+    <!-- jQuery -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write("<script src=\"js/vendor/jquery-2.1.1.min.js\"><\/script>")</script>
+
+    <!-- Scripts -->
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $(this).game();
+        });
+    </script>
+</body>
+</html>
