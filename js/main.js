@@ -134,7 +134,7 @@ $(function() {
 
 			function appendForm(el){
 				el.append('<div class="word"></div>');
-				el.append('<div class="output"><span>Wrong: </span><span class="error"></span><span class="tries"></span></div>');
+			//	el.append('<div class="output"><span>Wrong: </span><span class="error"></span><span class="tries"></span></div>');
 				el.append('<input type="text" id="wordinput">');
 				$("#wordinput").focus();
 				touchClick();
@@ -153,7 +153,10 @@ $(function() {
 
 			function appendGuessedWord(data,index,row){
 				var word = capFirstLetter(data[index].word);
-				row.append($('<span class="guessed animated flip">'+word+'</span>'));
+				row.append($('<span class="guessed animated flip">'+word+'</span>')).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+					function(){
+						startTurn();
+					});
 			}
 			
 			function capFirstLetter(string){
@@ -208,7 +211,7 @@ $(function() {
 						if(current+1 == index){ 
 							console.log("nextTurn() says: next turn=",index);
 							newTurn(index);
-							startTurn();
+							
 						}
 					}else{
 						console.log("nextTurn() says: game ended");
@@ -391,6 +394,8 @@ $(function() {
 				var delay = 0;
 
 				if(getGameEnded()){
+					$('.output').remove();
+
 					setTimeout(function(){
 						$.each(data, function(index, item) {
 							var el = $('<div class="bar_'+index+'"></div>');

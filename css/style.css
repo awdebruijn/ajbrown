@@ -549,12 +549,15 @@ li[class^="row"]{
 }
 .output{
 	clear:left;
-	margin-top:13px;
+	margin-top:20px;
 	font-size: 18px;
 	color:#767676;
 	background-color: #252525;
 	height:40px;
 	padding: 9px 20px;
+}
+.outputwrapper{
+
 }
 .animateOutput{
 	-webkit-animation: outputbackground 1s;
@@ -626,6 +629,7 @@ li[class^="row"]{
 #contact{
 	padding: 0 20px;
 	height:40px;
+	margin-top:50px;
 }
 #mail{
 	float:right;
@@ -677,7 +681,7 @@ li[class^="row"]{
 	}
 	#contact{
 		width:100%;
-		margin:0 auto;
+		margin:50px auto 0;
 	}
 	.guessed{
 		font-size:54px;
@@ -721,12 +725,12 @@ li[class^="row"]{
 		width:30%;
 	}
 	#game{
-		width:960px;
+		/*width:960px;*/
 		margin:25px auto 30px;
 	}
 	#contact{
 		width:960px;
-		margin:0 auto;
+		margin:50px auto 0;
 	}
 	.guessed{
 		font-size:54px;
@@ -744,12 +748,16 @@ li[class^="row"]{
 		text-align:left;
 		margin-top:80px;
 	}
+	.outputwrapper{
+		width:960px;
+		margin:0 auto;
+		padding:0 20px;
+	}
 	[class^="bar"]{
 		height: 65px;
 	}
 	.end{
 		top:138px;
-		width:960px;
 	}
 	#sticker{
 		width:230px;
