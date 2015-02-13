@@ -521,6 +521,13 @@ li[class^="row"]{
 .row_3 .letter{
 	border-bottom-color: #25EFD5;
 }
+main{
+	position:relative;
+}
+#game{
+	width:100%;
+	margin:30px auto;
+}
 .word,.output{
 	font-family: 'apercubold';
 }
@@ -535,6 +542,10 @@ li[class^="row"]{
 	font-family: 'platform';
 	font-size: 44px;
 	margin-left:20px;
+	-webkit-animation-duration: 0.5s;
+	-webkit-animation-iteration-count: 2;
+	animation-duration: 0.5s;
+	animation-iteration-count: 2;
 }
 .letter{
 	float:left;
@@ -542,30 +553,48 @@ li[class^="row"]{
 	width:27px;
 	height:42px;
 	margin-right: 4px;
+}
+.borderbottom{
 	border-bottom:4px solid;
 }
 [data-letter-index]{
-	-webkit-animation-duration: 0.3s;
+	-webkit-animation-duration: 0.4s;
+	animation-duration: 0.4s;
 }
 .output{
-	clear:left;
-	margin-top:20px;
-	font-size: 18px;
+	font-size: 16px;
 	color:#767676;
-	background-color: #252525;
 	height:40px;
 	padding: 9px 20px;
+	text-align:left;
+	float:left;
 }
 .outputwrapper{
-
+	width:156px;
 }
-.animateOutput{
+/*.animateOutput{
 	-webkit-animation: outputbackground 1s;
 	animation: outputbackground 1s;
 }
 @-webkit-keyframes outputbackground{
 	from {background-color: #FF5B45;}
 	to {background-color: #252525;}
+}
+@keyframes outputbackground{
+	from {background-color: #FF5B45;}
+	to {background-color: #252525;}
+}*/
+.animateOutput{
+	-webkit-animation: outputcolor 1.6s;
+	animation: outputcolor 1.6s;
+}
+@-webkit-keyframes outputcolor{
+	from {color: #FF5B45;}
+	to {color: #767676;}
+}
+@keyframes outputcolor{
+	from {color: #FF5B45;}
+	to {color: #767676;}
 }
 .error{
 	color:#4A4A4A;
@@ -575,6 +604,10 @@ li[class^="row"]{
 	animation: wronglettercolor 0.5s;
 }
 @-webkit-keyframes wronglettercolor{
+	from {color: #FFF;}
+	to {color: #4A4A4A;}
+}
+@keyframes wronglettercolor{
 	from {color: #FFF;}
 	to {color: #4A4A4A;}
 }
@@ -626,21 +659,30 @@ li[class^="row"]{
 	left: -3000px;
 	position: fixed;
 }
-#contact{
+#footerwrapper{
+	width:100%;
+	clear:both;
 	padding: 0 20px;
 	height:40px;
-	margin-top:50px;
+	color: white;
+	margin:0 auto;
+}
+.center{
+	margin:0 auto;
 }
 #mail{
 	float:right;
 	margin-top:5px;
+}
+#in{
+	float:left;
 }
 .end{
 	z-index: 10;
 	width: 100%;
 	height: 337px;
 	position: absolute;
-	top: 0;
+	top: -110px;
 	padding:20px;
 }
 #sticker{
@@ -656,32 +698,30 @@ li[class^="row"]{
 	top:155px;
 	z-index: 11;
  	-webkit-animation-duration: 0.2s;
+	animation-duration: 0.2s;
 }
 .animateRotation{
 	-webkit-animation-delay: 1.5s;
 	-webkit-animation: rotate 4s;
 	-webkit-animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
+	animation-delay: 1.5s;
 	animation: rotate 4s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
 }
 @-webkit-keyframes rotate{
+	from {-webkit-transform: rotate(0deg);}
+	to {-webkit-transform: rotate(360deg);}
+}
+@keyframes rotate{
 	from {transform: rotate(0deg);}
 	to {transform: rotate(360deg);}
 }
-
-/* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) and (max-width:1024px){
 	.header{
 		margin: 130px auto 40px;
 		width: 40%;
-	}
-	#game{
-		width:100%;
-		margin:30px auto;
-	}
-	#contact{
-		width:100%;
-		margin:50px auto 0;
 	}
 	.guessed{
 		font-size:54px;
@@ -696,15 +736,21 @@ li[class^="row"]{
 		text-align:center;
 	}
 	.output{
-		text-align:left;
-		margin-top:80px;
+		font-size: 18px;
+		margin-left:175px;
 	}
 	[class^="bar"]{
 		height: 65px;
 	}
+	.outputwrapper{
+		width:300px;
+	}
 	.end{
-		top:198px;
+		top:-114px;
 		width:100%;
+	}
+	.center{
+		width:810px;
 	}
 	#sticker{
 		width:230px;
@@ -713,9 +759,11 @@ li[class^="row"]{
 		width:190px;
 		top:177px;
 	}
+	#footerwrapper{
+		position:absolute;
+		top:300px;
+	}
 }
-
-/* Medium devices (desktops, 992px and up) */
 @media (min-width: 1025px) {
 	.responsive{
 
@@ -725,12 +773,7 @@ li[class^="row"]{
 		width:30%;
 	}
 	#game{
-		/*width:960px;*/
 		margin:25px auto 30px;
-	}
-	#contact{
-		width:960px;
-		margin:50px auto 0;
 	}
 	.guessed{
 		font-size:54px;
@@ -744,20 +787,23 @@ li[class^="row"]{
 	li[class^="row"]{
 		text-align:center;
 	}
+	.center{
+		width:960px;
+	}
 	.output{
-		text-align:left;
-		margin-top:80px;
+		font-size:18px;
+		margin-left:250px;
 	}
 	.outputwrapper{
-		width:960px;
 		margin:0 auto;
 		padding:0 20px;
+		width:300px;
 	}
 	[class^="bar"]{
 		height: 65px;
 	}
 	.end{
-		top:138px;
+		top:-114px;
 	}
 	#sticker{
 		width:230px;
@@ -766,11 +812,11 @@ li[class^="row"]{
 		width:190px;
 		top:177px;
 	}
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-	.end{
-		top:158px;
+	#footerwrapper{
+		position:absolute;
+		top:300px;
 	}
+}
+@media (min-width: 1200px) {
+
 }

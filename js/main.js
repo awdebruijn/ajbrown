@@ -18,6 +18,11 @@ $(function() {
 			var turnGoodChars = "";
 			var turnBadChars = "";
 			var turnTriesLeft = 5;
+			
+			// User Agent Variables
+			var isPhone = false;
+			var isIpad = false;
+
 
 			// Getters & Setters //
 			function setGameData(data){
@@ -80,10 +85,35 @@ $(function() {
 			function getGameEnded(){
 				return gameEnded;
 			}
+			function setIsPhone(bool){
+				isPhone = bool;
+			}
+			function getIsPhone(){
+				return isPhone;
+			}
+			function setIsIpad(bool){
+				isIpad = bool;
+			}
+			function getIsIpad(){
+				return isIpad;
+			}
+			function setUserAgent(){
+				// Detect User Agent
+				if(navigator.userAgent.match(/Android/i) ||
+					navigator.userAgent.match(/webOS/i) ||
+					navigator.userAgent.match(/iPhone/i) ||
+					navigator.userAgent.match(/iPod/i)) {
+					setIsPhone(true);					
+				}
+				if(navigator.userAgent.match(/iPad/i)){
+					setIsIpad(true);
+				}
+			}
 
 			// Functions //
 			function init(){
 				loadGame();
+				setUserAgent();
 			}
 
 			function loadGame(){
@@ -132,14 +162,26 @@ $(function() {
 				appendForm(el);
 			}
 
+			function getTriesText(){
+				var phone = getIsPhone();
+				var text;
+				if(phone){
+					text = "";
+				}else{
+					text = "Tries left: "
+				}
+				return text;
+			}
+
 			function appendForm(el){
 				el.append('<div class="word"></div>');
 			//	el.append('<div class="output"><span>Wrong: </span><span class="error"></span><span class="tries"></span></div>');
 				el.append('<input type="text" id="wordinput">');
 				$("#wordinput").focus();
 				touchClick();
-				$(".tries").text(''+getTurnTriesLeft()+'');
+				$(".tries").text(getTriesText()+getTurnTriesLeft()+'');
 			}
+
 
 			function touchClick(){ 							// iOs devices only show keyboard after user action
 				$('.selected').click(function(event) {
@@ -149,13 +191,25 @@ $(function() {
 
 			function removeForm(el){
 				el.empty();
+				$('.error').empty();
+			}
+
+			function reconstructOutput(){
+				var windowWidth = $(window).width();
+
+				if(windowWidth>768){
+					$('.output').remove();
+					$('')
+				}
 			}
 
 			function appendGuessedWord(data,index,row){
 				var word = capFirstLetter(data[index].word);
-				row.append($('<span class="guessed animated flip">'+word+'</span>')).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+				row.append($('<span class="guessed animated flash">'+word+'</span>')).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
 					function(){
-						startTurn();
+						if(!getGameEnded()){
+							startTurn();
+						}
 					});
 			}
 			
@@ -211,7 +265,6 @@ $(function() {
 						if(current+1 == index){ 
 							console.log("nextTurn() says: next turn=",index);
 							newTurn(index);
-							
 						}
 					}else{
 						console.log("nextTurn() says: game ended");
@@ -333,12 +386,18 @@ $(function() {
 				var el = $(".word");
 				var indices = findLetterPositions(tw, key);
 				var guessed = getTurnGoodChars()+getTurnBadChars();
+				var border;
 
 				console.log("turninput",w,indices);			
 				if(guessed==""){
 					// Render word with spaces
 					for(i = 0; i < tw.length; i++){
-						el.append($('<div class="letter"><span data-letter-index="'+i+'"> </span></div>'));
+						if(tw[i]==' '){
+							border = "";
+						} else{
+							border = "borderbottom";
+						}
+						el.append($('<div class="letter '+border+'"><span data-letter-index="'+i+'"> </span></div>'));
 					}
 				}else{
 					// Only replace new letters
@@ -349,16 +408,17 @@ $(function() {
 			}
 
 			function displayBadWord(key){
-				$('.output').addClass('animateOutput').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+				$('#wrong').addClass('animateOutput').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
 					function(){
 						$(this).removeClass('animateOutput');
 					});
+				$('.outputwrapper').removeClass('hidden');
 				$('.error').append('<span class="animateWrongLetterColor">'+key+'</span>');
 			}
 
 			function displayTriesLeft(){
 				var w = getTurnTriesLeft();
-				$(".tries").text(w);
+				$(".tries").text(getTriesText()+w);
 			}
 
 			function displayOverlay(t,i){
@@ -414,8 +474,7 @@ $(function() {
 						$('#available').addClass('animated bounceIn');
 						$('#sticker').addClass('animated bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
 						function(){
-							$(this).removeClass('animated bounceIn');
-							$(this).addClass('animateRotation');
+							$(this).removeClass('animated bounceIn').addClass('animateRotation');
 						});
 					}, 3400);
 				}
