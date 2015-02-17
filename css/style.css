@@ -533,7 +533,7 @@ main{
 }
 .word{
 	font-size: 34px;
-	margin-left:20px;
+	margin-left:16px;
 	height: 42px;
 	margin-bottom:13px;
 	width:284px;
@@ -572,18 +572,26 @@ main{
 .outputwrapper{
 	width:156px;
 }
-/*.animateOutput{
-	-webkit-animation: outputbackground 1s;
-	animation: outputbackground 1s;
+
+.cursor{
+	width:4px;
+	height:42px;
+	float:left;
 }
-@-webkit-keyframes outputbackground{
+.animateCursor{
+	-webkit-animation: animateCursor 1s;
+	animation: animateCursor 1s;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+}
+@-webkit-keyframes animateCursor{
+	from {background-color: #FFFFFF;}
+	to {background-color: #000000;}
+}
+@keyframes animateCursor{
 	from {background-color: #FF5B45;}
 	to {background-color: #252525;}
 }
-@keyframes outputbackground{
-	from {background-color: #FF5B45;}
-	to {background-color: #252525;}
-}*/
 .animateOutput{
 	-webkit-animation: outputcolor 1.6s;
 	animation: outputcolor 1.6s;
@@ -673,9 +681,13 @@ main{
 #mail{
 	float:right;
 	margin-top:5px;
+	-webkit-animation-duration: 0.5s;
+	animation-duration: 0.5s;
 }
 #in{
 	float:left;
+	-webkit-animation-duration: 0.5s;
+	animation-duration: 0.5s;
 }
 .end{
 	z-index: 10;
@@ -689,16 +701,23 @@ main{
 	display:block;
 	margin:0 auto;
 	position:relative;
-	top:4px;
+	top:-4px;
 }
 #available{
-	display:block;
+	font-family: 'platform';
+	font-size: 42px;
+	color:#fff;
+	text-align: center;
+}
+.rotate{
+	width:154px;
 	margin:0 auto;
 	position:relative;
-	top:155px;
+	top:157px;
 	z-index: 11;
  	-webkit-animation-duration: 0.2s;
 	animation-duration: 0.2s;
+	-webkit-transform: rotate(-15deg);
 }
 .animateRotation{
 	-webkit-animation-delay: 1.5s;
@@ -728,7 +747,7 @@ main{
 		margin-left:0;
 	}
 	.word{
-		width:284px;
+		width:288px;
 		margin:0 auto;
 		padding-left:4px;
 	}
@@ -752,12 +771,17 @@ main{
 	.center{
 		width:810px;
 	}
+	.rotate{
+		width:187px;
+		top:177px;
+	}
 	#sticker{
 		width:230px;
+		top:-7px;
 	}
 	#available{
-		width:190px;
-		top:177px;
+		font-size:48px;
+		width:189px;
 	}
 	#footerwrapper{
 		position:absolute;
@@ -780,7 +804,7 @@ main{
 		margin-left:0;
 	}
 	.word{
-		width:284px;
+		width:288px;
 		margin:0 auto;
 		padding-left:4px;
 	}
@@ -805,12 +829,17 @@ main{
 	.end{
 		top:-114px;
 	}
+	.rotate{
+		width:187px;
+		top:177px;
+	}
 	#sticker{
 		width:230px;
+		top:-7px;
 	}
 	#available{
-		width:190px;
-		top:177px;
+		font-size:48px;
+		width:189px;
 	}
 	#footerwrapper{
 		position:absolute;

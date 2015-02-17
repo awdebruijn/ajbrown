@@ -174,8 +174,7 @@ $(function() {
 			}
 
 			function appendForm(el){
-				el.append('<div class="word"></div>');
-			//	el.append('<div class="output"><span>Wrong: </span><span class="error"></span><span class="tries"></span></div>');
+				el.append('<div class="word"><div class="cursor"></div></div>');
 				el.append('<input type="text" id="wordinput">');
 				$("#wordinput").focus();
 				touchClick();
@@ -251,6 +250,9 @@ $(function() {
 				el = $("#game").find(".row_"+current);
 				removeForm(el);
 				el.removeClass("selected");
+
+				// Hide Output
+				$('.outputwrapper').addClass('hidden');
 			}
 
 			function nextTurn(){
@@ -286,8 +288,10 @@ $(function() {
 			};
 
 			function startTurn(){
+				$('.cursor').addClass('animateCursor');
 				$(root).keypress(function(event) {
 					var key = isAllowed(String.fromCharCode(event.which).toLowerCase()); // Only allowed chars will fire event
+					$('.cursor').removeClass('animateCursor');
 
 					if(!hasGuessed(key)){
 						if(inWord(key)){
@@ -452,6 +456,7 @@ $(function() {
 			function endAnimation(){
 				var data = getGameData();
 				var delay = 0;
+				var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
 				if(getGameEnded()){
 					$('.output').remove();
@@ -462,7 +467,7 @@ $(function() {
 							var rowColor = $("#game").find(".row_"+index).css('color');
 							$(".row_"+index).append(el);
 							el.css('backgroundColor', rowColor);
-							el.addClass('animateBarWidth').css('-webkit-animation-delay',''+delay+'s').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+							el.addClass('animateBarWidth').css('-webkit-animation-delay',''+delay+'s').one(animationEnd, 
 								function(){
 									$(this).css('width', '100%');
 								});
@@ -470,11 +475,15 @@ $(function() {
 						});
 					}, 2000);
 					setTimeout(function(){
-						$('#game').append('<div class="end"><img id="available" src="img/available.png" alt="available now" width="163"/><img id="sticker" src="img/sticker.png" alt="sticker" width="200"/></div>');
+						$('#game').append('<div class="end"><div class="rotate"><div id="available">available</br>now!</div></div><img id="sticker" src="img/sticker.png" alt="sticker" width="200"/></div>');
 						$('#available').addClass('animated bounceIn');
-						$('#sticker').addClass('animated bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', 
+						$('#sticker').addClass('animated bounceIn').one(animationEnd, 
 						function(){
 							$(this).removeClass('animated bounceIn').addClass('animateRotation');
+							$('#in').addClass('animated pulse').one(animationEnd,
+								function(){
+									 $('#mail').addClass('animated pulse');
+								});
 						});
 					}, 3400);
 				}
