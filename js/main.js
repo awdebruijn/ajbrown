@@ -477,14 +477,23 @@ $(function() {
 					setTimeout(function(){
 						$('#game').append('<div class="end"><div class="rotate"><div id="available">available</br>now!</div></div><img id="sticker" src="img/sticker.png" alt="sticker" width="200"/></div>');
 						$('#available').addClass('animated bounceIn');
+						
 						$('#sticker').addClass('animated bounceIn').one(animationEnd, 
-						function(){
-							$(this).removeClass('animated bounceIn').addClass('animateRotation');
-							$('#in').addClass('animated pulse').one(animationEnd,
-								function(){
-									 $('#mail').addClass('animated pulse');
-								});
-						});
+							function(){
+								$(this).removeClass('animated bounceIn').addClass('animateRotation');
+								$('.in2').css('fill','#ffffff');
+								
+								setTimeout(function(){
+									$('.mail2').css('fill','#ffffff');
+								}, 500);
+								
+								$('.in2, .mail2').hover(
+									function() {
+										$(this).css('fill','#58595B');
+									},function(){
+										$(this).css('fill','#fff');
+									});
+							});
 					}, 3400);
 				}
 			}

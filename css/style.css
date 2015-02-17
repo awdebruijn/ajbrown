@@ -684,10 +684,35 @@ main{
 	-webkit-animation-duration: 0.5s;
 	animation-duration: 0.5s;
 }
+.mail1{
+	fill:none;
+	fill-rule: evenodd;
+}
+.mail2{
+	fill:#58595B;
+	transition: fill 0.2s ease;
+}
+.mail2:hover{
+	fill:#fff;
+}
 #in{
 	float:left;
 	-webkit-animation-duration: 0.5s;
 	animation-duration: 0.5s;
+}
+.in1{
+	fill:none;
+	fill-rule:evenodd;
+}
+.in2{
+	fill:#58595B;
+	transition: fill 0.2s ease;
+}
+.in2:hover{
+	fill:#fff;
+}
+.whitefill{
+	fill:#fff;
 }
 .end{
 	z-index: 10;
