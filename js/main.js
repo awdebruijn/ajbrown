@@ -175,6 +175,7 @@ $(function() {
 
 			function appendForm(el){
 				el.append('<div class="word"><div class="cursor"></div></div>');
+				el.append('<div class="mask"></div>');
 				el.append('<input type="text" id="wordinput">');
 				$("#wordinput").focus();
 				touchClick();
@@ -406,7 +407,7 @@ $(function() {
 				}else{
 					// Only replace new letters
 					for(j=0; j < indices.length; j++){
-						$("span[data-letter-index="+indices[j]+"]").empty().text(key).addClass('animated bounceInUp');
+						$("span[data-letter-index="+indices[j]+"]").empty().text(key).addClass('moveUp');
 					}
 				}
 			}
